@@ -1,0 +1,30 @@
+#include "Factory.h"
+
+Object Factory::getObject(string type)
+{
+	Object returnObject;
+
+	struct object_has_type
+	{
+		object_has_type(string const& n) : type(n) {}
+		bool operator () (Object& p) { return p.getType() == type; }
+	private:
+		string type;
+	};
+
+	vector<Object>::iterator it = find_if(listOf.begin(), listOf.end(), object_has_type(type));
+
+	if (it != listOf.end())
+	{
+		returnObject = *it;
+	}
+	else
+	{
+		Object* temp;
+		temp = new Object();
+		temp->setType(type);
+		listOf.push_back(*temp);
+		returnObject = *temp;
+	}
+	return returnObject;
+}

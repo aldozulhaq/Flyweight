@@ -6,7 +6,7 @@ void Manager::generateObject()
 
 	for (int i = 0; i < 9; i++)
 	{
-		array[i] = factory.getObject(randomType(0 + rand() % 3));
+		array[i] = *factory.getObject(randomType(0 + rand() % 3));
 		array[i].setCoor(i);
 		array[i].setSize(rand(), rand());
 	}

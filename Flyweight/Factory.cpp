@@ -1,8 +1,8 @@
 #include "Factory.h"
 
-Object Factory::getObject(string type)
+Object * Factory::getObject(string type)
 {
-	Object returnObject;
+	Object * returnObject = new Object;
 
 	struct object_has_type
 	{
@@ -16,7 +16,7 @@ Object Factory::getObject(string type)
 
 	if (it != listOf.end())
 	{
-		returnObject = *it;
+		*returnObject = *it;
 	}
 	else
 	{
@@ -24,7 +24,7 @@ Object Factory::getObject(string type)
 		temp = new Object();
 		temp->setType(type);
 		listOf.push_back(*temp);
-		returnObject = *temp;
+		returnObject = temp;
 	}
 	return returnObject;
 }
